@@ -116,29 +116,6 @@ fig_map.update_coloraxes(
         ticktext=["$10", "$100", "$1K", "$10K", "$100K", "$1M"]
     )
 )
-
-st.plotly_chart(fig_map, use_container_width=True)
-st.subheader("Global Revenue Distribution")
-
-country_rev = df.groupby("Country")["Revenue"].sum().reset_index()
-country_rev["LogRevenue"] = np.log10(country_rev["Revenue"] + 1)
-
-fig6 = px.choropleth(
-    country_rev,
-    locations="Country",
-    locationmode="country names",
-    color="LogRevenue",
-    color_continuous_scale="Viridis",
-    title="Revenue by Country (Log Scale)",
-    labels={"LogRevenue": "log10(Revenue)"},
-    hover_data={
-        "Revenue": ":$,.0f",   # show actual dollars
-        "LogRevenue": False    # hide log value from hover
-    }
-)
-
-st.plotly_chart(fig6, use_container_width=True)
-
 # ------------------ SEASONALITY HEATMAP ------------------
 
 df["Year"] = df["InvoiceDate"].dt.year
