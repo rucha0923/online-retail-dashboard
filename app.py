@@ -47,7 +47,7 @@ with col1:
     fig2 = px.bar(top_products, x="Quantity", y="Description",
                   orientation="h", title="Top 10 Products")
     st.plotly_chart(fig2, use_container_width=True)
-  st.markdown(""" 
+    st.markdown(""" 
     This bar chart highlights the top 10 best-selling products. These products generate the most revenue and are key contributors to overall sales.
     """)
 
