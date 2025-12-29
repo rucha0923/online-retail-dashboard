@@ -4,6 +4,9 @@ import numpy as np
 import plotly.express as px
 
 st.set_page_config(page_title="Online Retail Dashboard", layout="wide")
+st.markdown("""
+This is a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail.The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
+""")
 
 # ------------------ LOAD DATA ------------------
 df = pd.read_csv("retail_dashboard_data.csv")
