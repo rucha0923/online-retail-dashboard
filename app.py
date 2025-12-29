@@ -122,36 +122,6 @@ fig_map.update_coloraxes(
 
 st.plotly_chart(fig_map, use_container_width=True)
 
-
-# ------------------ SEASONALITY HEATMAP ------------------
-
-df["Year"] = df["InvoiceDate"].dt.year
-df["Month"] = df["InvoiceDate"].dt.month_name()
-
-season = df.groupby(["Year", "Month"])["Revenue"].sum().reset_index()
-season["Year"] = season["Year"].astype(str)
-
-month_order = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-]
-
-# Force month order at the Plotly level
-fig7 = px.density_heatmap(
-    season,
-    x="Month",
-    y="Year",
-    z="Revenue",
-    title="Revenue Seasonality Heatmap",
-    category_orders={"Month": month_order}
-)
-
-# Force categorical axes (prevents decimals on years + locks categories)
-fig7.update_xaxes(type="category", categoryorder="array", categoryarray=month_order)
-fig7.update_yaxes(type="category")
-
-st.plotly_chart(fig7, use_container_width=True)
-
 # ------------------ INSIGHTS ------------------
 st.markdown("---")
 st.subheader("Key Insights & Recommendations")
