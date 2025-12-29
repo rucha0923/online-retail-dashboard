@@ -84,6 +84,7 @@ with col2:
 # ------------------ GLOBAL MAP ------------------
 import numpy as np
 import plotly.express as px
+import streamlit as st
 
 # --- Revenue by country ---
 country_rev = (
@@ -93,6 +94,9 @@ country_rev = (
 
 # Log-transform for color scaling
 country_rev["log_revenue"] = np.log10(country_rev["Revenue"])
+
+# Title above the chart
+st.subheader("Global Revenue by Country")
 
 fig_map = px.choropleth(
     country_rev,
@@ -104,11 +108,10 @@ fig_map = px.choropleth(
         "Revenue": ":$,.0f",
         "log_revenue": False
     },
-    color_continuous_scale="viridis",
-    title="Global Revenue by Country"
+    color_continuous_scale="viridis"
 )
 
-# Colorbar shows real dollar values
+# Optional: colorbar shows real dollar values
 fig_map.update_coloraxes(
     colorbar=dict(
         title="Revenue ($)",
@@ -118,26 +121,7 @@ fig_map.update_coloraxes(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
-st.subheader("Global Revenue Distribution")
 
-country_rev = df.groupby("Country")["Revenue"].sum().reset_index()
-country_rev["LogRevenue"] = np.log10(country_rev["Revenue"] + 1)
-
-fig6 = px.choropleth(
-    country_rev,
-    locations="Country",
-    locationmode="country names",
-    color="LogRevenue",
-    color_continuous_scale="Viridis",
-    title="Revenue by Country (Log Scale)",
-    labels={"LogRevenue": "log10(Revenue)"},
-    hover_data={
-        "Revenue": ":$,.0f",   # show actual dollars
-        "LogRevenue": False    # hide log value from hover
-    }
-)
-
-st.plotly_chart(fig6, use_container_width=True)
 
 # ------------------ SEASONALITY HEATMAP ------------------
 
