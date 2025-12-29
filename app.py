@@ -82,6 +82,7 @@ with col2:
     st.plotly_chart(fig5, use_container_width=True)
 
 # ------------------ GLOBAL MAP ------------------
+<<<<<<< HEAD
 import numpy as np
 import plotly.express as px
 
@@ -118,6 +119,28 @@ fig_map.update_coloraxes(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
+=======
+st.subheader("Global Revenue Distribution")
+
+country_rev = df.groupby("Country")["Revenue"].sum().reset_index()
+country_rev["LogRevenue"] = np.log10(country_rev["Revenue"] + 1)
+
+fig6 = px.choropleth(
+    country_rev,
+    locations="Country",
+    locationmode="country names",
+    color="LogRevenue",
+    color_continuous_scale="Viridis",
+    title="Revenue by Country (Log Scale)",
+    labels={"LogRevenue": "log10(Revenue)"},
+    hover_data={
+        "Revenue": ":$,.0f",   # show actual dollars
+        "LogRevenue": False    # hide log value from hover
+    }
+)
+
+st.plotly_chart(fig6, use_container_width=True)
+>>>>>>> 7cdfd2722b75d59e5ec8706506e9a223745f0062
 
 # ------------------ SEASONALITY HEATMAP ------------------
 
