@@ -151,7 +151,7 @@ st.subheader("Key Insights & Recommendations")
 
 st.markdown("""
 • Revenue is highly seasonal, peaking toward the end of the year  
-• Repeat customers contribute disproportionately to total revenue  
+• Repeat customers make up a large percentage of the total revenue  
 • A small number of products drive the majority of sales  
 • Several low-demand products could be reconsidered for inventory optimization  
 • Revenue is geographically concentrated in a small number of countries
