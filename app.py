@@ -47,10 +47,16 @@ with col1:
     fig2 = px.bar(top_products, x="Quantity", y="Description",
                   orientation="h", title="Top 10 Products")
     st.plotly_chart(fig2, use_container_width=True)
+  st.markdown(""" 
+    This bar chart highlights the top 10 best-selling products. These products generate the most revenue and are key contributors to overall sales.
+    """)
 
 with col2:
     st.markdown("#### 10 Least Ordered Products")
     st.dataframe(least_products, use_container_width=True, height=350)
+    st.markdown("""  
+    This table shows the 10 least ordered products. These items have the lowest demand and could be considered for inventory optimization or discontinuation.
+    """)
 
 # ------------------ CUSTOMER ANALYSIS ------------------
 st.subheader("Customer Behavior")
@@ -65,6 +71,10 @@ fig3 = px.box(cust, x="Type", y="Revenue", log_y=True,
 
 fig3.update_yaxes(tickvals=[10,100,1000,10000,100000,1000000])
 st.plotly_chart(fig3, use_container_width=True)
+st.markdown(""" 
+This box plot compares revenue from one-time vs repeat customers. Repeat customers tend to contribute more to total revenue, showing the value of customer retention.
+""")
+
 
 # ------------------ CUSTOMER PERCENTAGE PIES ------------------
 cust_count = cust["Type"].value_counts().reset_index()
@@ -78,11 +88,17 @@ with col1:
     fig4 = px.pie(cust_count, values="Count", names="Type",
                   title="Customer Breakdown (%)")
     st.plotly_chart(fig4, use_container_width=True)
+    st.markdown(""" 
+    This pie chart shows the proportion of one-time vs repeat customers. Most revenue comes from repeat customers even if their number is smaller.
+    """)
 
 with col2:
     fig5 = px.pie(cust_rev_type, values="Revenue", names="Type",
                   title="Revenue Contribution by Customer Type (%)")
     st.plotly_chart(fig5, use_container_width=True)
+    st.markdown("""  
+    This pie chart shows revenue contribution by customer type. Repeat customers dominate revenue, reinforcing the importance of loyalty programs.
+    """)
 
 # ------------------ GLOBAL MAP ------------------
 import numpy as np
@@ -124,6 +140,9 @@ fig_map.update_coloraxes(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
+st.markdown("""
+This map displays revenue by country (log-scaled). Countries with lighter colors generate higher revenue, highlighting key geographic markets for the business.
+""")
 
 # ------------------ INSIGHTS ------------------
 st.markdown("---")
